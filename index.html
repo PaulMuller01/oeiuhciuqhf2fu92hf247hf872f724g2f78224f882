@@ -13,6 +13,7 @@
             width: 50%;
             height: 100vh;
             border: none;
+            overflow: auto; /* Dodano pasek przewijania */
         }
     </style>
 </head>
@@ -25,7 +26,8 @@
         fetch('https://nend.io/')
             .then(response => response.text())
             .then(data => {
-                document.getElementById('rightFrameContent').innerHTML = data;
+                document.getElementById('leftFrame').contentDocument.documentElement.innerHTML = data;
+                document.getElementById('rightFrame').contentDocument.documentElement.innerHTML = data;
             })
             .catch(error => {
                 console.error('Błąd pobierania zawartości strony:', error);
