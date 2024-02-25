@@ -7,31 +7,55 @@
     <style>
         body {
             display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
         }
 
         .frameContainer {
             width: 50%;
-            height: 100vh;
+            height: 50vh;
             border: none;
-            overflow: auto; /* Dodano pasek przewijania */
+            overflow: auto;
+        }
+
+        #addFrames, #removeFrames {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+    <button id="addFrames" onclick="addFrames()">Dodaj 2 ekrany</button>
+    <button id="removeFrames" onclick="removeFrames()">Odejmij 2 ekrany</button>
+
     <iframe class="frameContainer" id="leftFrame" src="https://nend.io/" frameborder="0"></iframe>
     <iframe class="frameContainer" id="rightFrame" src="https://nend.io/" frameborder="0"></iframe>
 
     <script>
-        // Pobierz zawartość strony i umieść ją w elemencie div
-        fetch('https://nend.io/')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('leftFrame').contentDocument.documentElement.innerHTML = data;
-                document.getElementById('rightFrame').contentDocument.documentElement.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Błąd pobierania zawartości strony:', error);
-            });
+        function addFrames() {
+            const newLeftFrame = document.createElement('iframe');
+            newLeftFrame.className = 'frameContainer';
+            newLeftFrame.src = 'https://nend.io/';
+            newLeftFrame.frameborder = '0';
+
+            const newRightFrame = document.createElement('iframe');
+            newRightFrame.className = 'frameContainer';
+            newRightFrame.src = 'https://nend.io/';
+            newRightFrame.frameborder = '0';
+
+            document.body.appendChild(newLeftFrame);
+            document.body.appendChild(newRightFrame);
+        }
+
+        function removeFrames() {
+            const frameContainers = document.querySelectorAll('.frameContainer');
+            if (frameContainers.length > 2) {
+                document.body.removeChild(frameContainers[frameContainers.length - 1]);
+                document.body.removeChild(frameContainers[frameContainers.length - 2]);
+            }
+        }
     </script>
 </body>
 </html>
