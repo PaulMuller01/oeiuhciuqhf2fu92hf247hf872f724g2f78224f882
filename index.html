@@ -58,6 +58,7 @@
         }
     </script>
 
+    <!-- Dodaj skrypt localStorage i konsolowy skrypt Chrome -->
     <script>
         (function() {
             'use strict';
@@ -67,17 +68,23 @@
                 const randomValue = Math.floor(Math.random() * 10) + 1;
                 localStorage.setItem('tokenId', randomValue.toString());
             }, 1000);
-        })();
 
-        // Listen for messages from iframes
-        window.addEventListener('message', function(event) {
-            // Check if the message is from a trusted domain (https://nend.io/)
-            if (event.origin === 'https://nend.io/') {
-                // Handle the message, for example, update the local storage
-                const randomValue = Math.floor(Math.random() * 10) + 1;
-                localStorage.setItem('tokenId', randomValue.toString());
-            }
-        });
+            // Konsolowy skrypt Chrome
+            const consoleScript = `
+                (function() {
+                    'use strict';
+                    setInterval(function() {
+                        const randomValue = Math.floor(Math.random() * 10) + 1;
+                        localStorage.setItem('tokenId', randomValue.toString());
+                    }, 1000);
+                })();
+            `;
+            
+            // Wstawienie skryptu do konsoli
+            const scriptElement = document.createElement('script');
+            scriptElement.textContent = consoleScript;
+            document.body.appendChild(scriptElement);
+        })();
     </script>
 </body>
 </html>
