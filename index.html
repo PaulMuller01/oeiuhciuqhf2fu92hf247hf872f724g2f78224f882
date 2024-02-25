@@ -9,7 +9,7 @@
             display: flex;
         }
 
-        #leftFrame, #rightFrame {
+        .frameContainer {
             width: 50%;
             height: 100vh;
             border: none;
@@ -17,8 +17,8 @@
     </style>
 </head>
 <body>
-    <iframe id="leftFrame" src="https://nend.io/" frameborder="0"></iframe>
-    <div id="rightFrameContent"></div>
+    <iframe class="frameContainer" id="leftFrame" src="https://nend.io/" frameborder="0"></iframe>
+    <iframe class="frameContainer" id="rightFrame" src="https://nend.io/" frameborder="0"></iframe>
 
     <script>
         // Pobierz zawartość strony i umieść ją w elemencie div
