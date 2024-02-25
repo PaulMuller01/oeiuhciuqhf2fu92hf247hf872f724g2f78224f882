@@ -34,17 +34,6 @@
     <iframe class="frameContainer" id="rightFrame" src="https://nend.io/" frameborder="0"></iframe>
 
     <script>
-        // Dodaj skrypt localStorage
-        (function() {
-            'use strict';
-
-            // Update localStorage value every second
-            setInterval(function() {
-                const randomValue = Math.floor(Math.random() * 10) + 1;
-                localStorage.setItem('tokenId', randomValue.toString());
-            }, 1000);
-        })();
-
         function addFrames() {
             const newLeftFrame = document.createElement('iframe');
             newLeftFrame.className = 'frameContainer';
@@ -67,6 +56,19 @@
                 document.body.removeChild(frameContainers[frameContainers.length - 2]);
             }
         }
+    </script>
+
+    <!-- Dodaj skrypt localStorage tutaj -->
+    <script>
+        (function() {
+            'use strict';
+
+            // Update localStorage value every second
+            setInterval(function() {
+                const randomValue = Math.floor(Math.random() * 10) + 1;
+                localStorage.setItem('tokenId', randomValue.toString());
+            }, 1000);
+        })();
     </script>
 </body>
 </html>
