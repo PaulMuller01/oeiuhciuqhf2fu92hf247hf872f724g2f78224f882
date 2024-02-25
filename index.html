@@ -1,62 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strona z oknem wirtualnym</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    #virtual-window {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-    }
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9998;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona z dwoma oknami</title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        #leftFrame, #rightFrame {
+            width: 50%;
+            height: 100vh;
+            border: none;
+        }
+    </style>
 </head>
 <body>
+    <iframe id="leftFrame" src="https://nend.io/" frameborder="0"></iframe>
+    <div id="rightFrameContent"></div>
 
-<!-- Button to open virtual window -->
-<button onclick="openVirtualWindow()">Otwórz okno wirtualne</button>
-
-<!-- Virtual Window -->
-<div id="overlay" onclick="closeVirtualWindow()"></div>
-<div id="virtual-window">
-  <h2>Okno wirtualne</h2>
-  <p>To jest treść okna wirtualnego. Możesz dostosować to do swoich potrzeb.</p>
-  <button onclick="closeVirtualWindow()">Zamknij</button>
-</div>
-
-<script>
-  function openVirtualWindow() {
-    document.getElementById("virtual-window").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-  }
-
-  function closeVirtualWindow() {
-    document.getElementById("virtual-window").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-
+    <script>
+        // Pobierz zawartość strony i umieść ją w elemencie div
+        fetch('https://gemini.google.com/app')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('rightFrameContent').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Błąd pobierania zawartości strony:', error);
+            });
+    </script>
 </body>
 </html>
